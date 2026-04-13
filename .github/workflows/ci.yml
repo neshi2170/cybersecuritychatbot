@@ -1,4 +1,4 @@
-name: .NET Build
+name: Build CyberSecurityChatbot
 
 on:
   push:
@@ -11,18 +11,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: 6.0.x
 
-    - name: Restore
+    - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --no-restore
-
-    - name: Run
-      run: dotnet run
+    - name: Build project
+      run: dotnet build --configuration Release
